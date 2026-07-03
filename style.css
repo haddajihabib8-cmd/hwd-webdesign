@@ -3,7 +3,7 @@
    Palette:  #0B0E12 bg · #10141A bg-alt · #141922 surface
              #E9ECF1 text · #9AA4B2 muted
              #5EA8FF blueprint (structure/links) · #C9A227 brass (action/premium)
-   Type:     Archivo (display) / Inter (body) / IBM Plex Mono (annotations)
+   Type:     System fonts only, no external Google Fonts
    Signature: architectural blueprint lines — grid, crosshairs, sheet numbers
    ========================================================================== */
 
@@ -23,9 +23,9 @@
   --brass-hover: #ddb63c;
   --radius-s: 3px;
   --radius-m: 6px;
-  --font-display: 'Archivo', 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   --wrap: 1180px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -351,7 +351,7 @@ section { padding-block: 116px; }
 .value-item p { color: var(--text-muted); font-size: 0.92rem; }
 
 /* ==========================================================================
-   Leistungen (services)
+   Leistungen
    ========================================================================== */
 .service-grid {
   display: grid;
@@ -380,6 +380,7 @@ section { padding-block: 116px; }
 .service-card::after { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
 .service-card:hover { background: var(--surface); }
 .service-card:hover::before, .service-card:hover::after { opacity: 1; }
+.service-card--wide { grid-column: 1 / -1; }
 
 .sheet-no {
   display: block;
@@ -402,7 +403,7 @@ section { padding-block: 116px; }
 .service-card p { color: var(--text-muted); font-size: 0.94rem; }
 
 /* ==========================================================================
-   Ablauf (process)
+   Ablauf
    ========================================================================== */
 .ablauf { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .process-list {
@@ -436,7 +437,7 @@ section { padding-block: 116px; }
    ========================================================================== */
 .audience-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 26px;
 }
 .audience-card {
@@ -478,45 +479,55 @@ section { padding-block: 116px; }
   text-transform: uppercase;
   color: var(--text-dim);
 }
+.kontakt-meta a {
+  font-size: 0.98rem;
+  transition: color 0.2s var(--ease);
+}
+.kontakt-meta a:hover { color: var(--blue); }
 
-.kontakt-form {
+.kontakt-panel {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-m);
-  padding: 36px;
+  padding: 40px 36px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
-.form-row { display: flex; flex-direction: column; gap: 8px; }
-.form-row label {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
-.form-row input,
-.form-row select,
-.form-row textarea {
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-s);
-  padding: 12px 14px;
-  background: var(--bg);
-  font-size: 0.95rem;
-  transition: border-color 0.2s var(--ease);
-  resize: vertical;
-}
-.form-row input:focus,
-.form-row select:focus,
-.form-row textarea:focus {
-  border-color: var(--blue);
-  outline: none;
-}
-.form-row select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%); background-position: calc(100% - 18px) center, calc(100% - 13px) center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; }
-.form-status {
-  font-size: 0.86rem;
+.panel-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--blue);
-  min-height: 1.2em;
+  margin-bottom: 14px;
 }
-.form-status.is-error { color: #e08b8b; }
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.panel-lead {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+
+.kontakt-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.kontakt-actions .btn { gap: 10px; }
+.kontakt-actions .btn svg { flex-shrink: 0; }
+
+.panel-note {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  font-size: 0.84rem;
+  color: var(--text-dim);
+}
 
 /* ==========================================================================
    Footer
